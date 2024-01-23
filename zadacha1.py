@@ -1,26 +1,20 @@
 import json
+import datetime
+import uuid
 
 # Функция для создания заметки
 def create_note():
     title = input("Введите заголовок заметки: ")
     text = input("Введите текст заметки: ")
+    note_id = str(uuid.uuid4())  # Генерация уникального идентификатора
+    created_at = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     note = {
-        "id": generate_id(),
+        "id": note_id,
         "title": title,
         "text": text,
-        "created_at": get_current_time()
+        "created_at": created_at
     }
     return note
-
-# Функция для генерации уникального идентификатора
-def generate_id():
-    # Реализуйте логику генерации уникального идентификатора
-    pass
-
-# Функция для получения текущего времени
-def get_current_time():
-    # Реализуйте логику получения текущего времени
-    pass
 
 # Функция для сохранения заметки в файл
 def save_note(note):
@@ -42,7 +36,7 @@ def edit_note():
         if note["id"] == note_id:
             note["title"] = input("Введите новый заголовок заметки: ")
             note["text"] = input("Введите новый текст заметки: ")
-            note["updated_at"] = get_current_time()
+            note["updated_at"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             break
     else:
         print("Заметка с указанным идентификатором не найдена")
@@ -97,4 +91,4 @@ def main():
             print("Неверный выбор. Попробуйте еще раз.")
 
 if __name__ == "__main__":
-    main()
+    main() 
